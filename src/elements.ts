@@ -169,4 +169,4 @@ export const svgElements = [
   'textPath'
 ]
 
-const elements = htmlElements.concat(svgElements)
+export const elements = htmlElements.concat(svgElements)
