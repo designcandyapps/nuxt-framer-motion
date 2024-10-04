@@ -1,0 +1,48 @@
+{
+  "name": "nuxt-framer-motion",
+  "version": "1.0.0-alpha.1",
+  "packageManager": "pnpm@9.11.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adjabaev/vue-framer-motion"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "nuxt-module-build build",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+    "release": "npm run lint && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.13.2"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "^1.5.1",
+    "@nuxt/eslint-config": "^0.5.7",
+    "@nuxt/module-builder": "^0.8.4",
+    "@nuxt/schema": "^3.13.2",
+    "@types/node": "latest",
+    "changelogen": "^0.5.7",
+    "eslint": "^9.11.1",
+    "nuxt": "^3.13.2",
+    "typescript": "^5.6.2",
+    "vue-tsc": "^2.1.6"
+  },
+  "resolutions": {
+    "nuxt-framer-motion": "workspace:*"
+  }
+}
