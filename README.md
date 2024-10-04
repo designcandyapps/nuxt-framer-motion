@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://framerusercontent.com/images/48ha9ZR9oZQGQ6gZ8YUfElP3T0A.png" width="50" height="50" alt="Framer Motion Icon" />
 </p>
-<h1 align="center">Vue Framer Motion</h1>
+<h1 align="center">Nuxt Framer Motion</h1>
 <h3 align="center">
   An open source adaptation of the popular React motion library for Vue.
 </h3>
