@@ -5,7 +5,7 @@ export interface ModuleOptions {}
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: 'nuxt-framer-motion',
+    name: 'framer-motion/nuxt',
     configKey: 'motion'
   },
   defaults: {},
