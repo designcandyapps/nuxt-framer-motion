@@ -25,8 +25,6 @@ import { isRefObject } from '#motion/utils/isRefObject'
 import { useIsomorphicLayoutEffect } from '#motion/utils/useIsomorphicLayoutEffect'
 import type { DefineComponent, Ref } from 'vue'
 
-let scheduleHandoffComplete = false
-
 export function useVisualElement<Instance, RenderState>(
   component: string | DefineComponent,
   element: Ref<Instance>,
@@ -93,7 +91,7 @@ export function useVisualElement<Instance, RenderState>(
   const optimisedAppearId = props[optimizedAppearDataAttribute as keyof typeof props]
   const wantsHandoff = ref(
     Boolean(optimisedAppearId)
-    && !window.MotionHandoffIsComplete
+    && !window.MotionOptimisedAnimationHandedover?.(optimisedAppearId)
     && window.MotionHasOptimisedAnimation?.(optimisedAppearId)
   )
 
@@ -131,23 +129,23 @@ export function useVisualElement<Instance, RenderState>(
   useEffect(() => {
     if (!visualElement) return
 
-    if (!wantsHandoff.value && visualElement.animationState) {
+    const handoffNeeded = wantsHandoff.value
+
+    if (!handoffNeeded && visualElement.animationState) {
       visualElement.animationState.animateChanges()
     }
 
-    wantsHandoff.value = false
-    // This ensures all future calls to animateChanges() will run in useEffect
-    if (!scheduleHandoffComplete) {
-      scheduleHandoffComplete = true
-      queueMicrotask(completeHandoff)
+    if (handoffNeeded) {
+      // This ensures all future calls to animateChanges() in this component will run in useEffect
+      queueMicrotask(() =>
+        window.MotionOptimisedAnimationHandoff?.(optimisedAppearId)
+      )
     }
+
+    wantsHandoff.value = false
   })
 
   return visualElement
-}
-
-function completeHandoff() {
-  window.MotionHandoffIsComplete = true
 }
 
 function createProjectionNode(
