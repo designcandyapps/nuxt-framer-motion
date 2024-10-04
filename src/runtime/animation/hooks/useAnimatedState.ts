@@ -1,4 +1,4 @@
-import { useLayoutEffect } from '#motion/composables/useLayoutEffect'
+import { useLayoutEffect } from '#motion/react/useLayoutEffect'
 import { useConstant } from '#motion/utils/useConstant'
 import type { TargetAndTransition } from '#motion/types'
 import type { ResolvedValues } from '#motion/render/types'

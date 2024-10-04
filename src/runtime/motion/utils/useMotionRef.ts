@@ -1,4 +1,4 @@
-import { useCallback } from '#motion/composables/useCallback'
+import { useCallback } from '#motion/react/useCallback'
 import type { Ref } from 'vue'
 import type { VisualElement } from '#motion/render/VisualElement'
 import type { VisualState } from '#motion/motion/utils/useVisualState'

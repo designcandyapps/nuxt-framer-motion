@@ -1,4 +1,4 @@
-import { useInsertionEffect } from '#motion/composables/useInsertionEffect'
+import { useInsertionEffect } from '#motion/react/useInsertionEffect'
 import type { MotionValue } from '#motion/value/index'
 import { isMotionValue } from '#motion/value/utils/isMotionValue'
 import { useMotionValue } from '#motion/value/useMotionValue'

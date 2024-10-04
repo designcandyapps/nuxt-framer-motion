@@ -1,7 +1,7 @@
 import type { Ref } from 'vue'
 import { motionValue } from '#motion/value/index'
 import { useConstant } from '#motion/utils/useConstant'
-import { useEffect } from '#motion/composables/useEffect'
+import { useEffect } from '#motion/react/useEffect'
 import { useIsomorphicLayoutEffect } from '#motion/utils/useIsomorphicLayoutEffect'
 import { warning } from '#motion/utils/errors'
 import { scroll } from '#motion/render/dom/scroll'

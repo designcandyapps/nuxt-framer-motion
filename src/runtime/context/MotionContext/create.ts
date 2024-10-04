@@ -1,4 +1,4 @@
-import { useMemo } from '#motion/composables/useMemo'
+import { useMemo } from '#motion/react/useMemo'
 import { IKMotionContext, type MotionContextProps } from '#motion/context/MotionContext/index'
 import { getCurrentTreeVariants } from '#motion/context/MotionContext/utils'
 import type { MotionProps } from '#motion/motion/types'

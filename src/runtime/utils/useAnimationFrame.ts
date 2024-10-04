@@ -1,5 +1,5 @@
 import { cancelFrame, frame } from '#motion/frameloop'
-import { useEffect } from '#motion/composables/useEffect'
+import { useEffect } from '#motion/react/useEffect'
 import {
   IKMotionConfigContext,
   type MotionConfigContext,

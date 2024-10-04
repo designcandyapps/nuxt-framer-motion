@@ -1,6 +1,6 @@
 import { optimizedAppearDataAttribute } from '#motion/animation/optimizedAppear/dataId'
-import { useEffect } from '#motion/composables/useEffect'
-import { useInsertionEffect } from '#motion/composables/useInsertionEffect'
+import { useEffect } from '#motion/react/useEffect'
+import { useInsertionEffect } from '#motion/react/useInsertionEffect'
 import { IKLazyContext, type LazyContextProps } from '#motion/context/LazyContext'
 import {
   IKMotionConfigContext,

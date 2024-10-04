@@ -1,4 +1,4 @@
-import { useMemo } from '#motion/composables/useMemo'
+import { useMemo } from '#motion/react/useMemo'
 import type { MotionProps } from '#motion/motion/types'
 import { isForcedMotionValue } from '#motion/motion/utils/isForcedMotionValue'
 import type { MotionValue } from '#motion/value'

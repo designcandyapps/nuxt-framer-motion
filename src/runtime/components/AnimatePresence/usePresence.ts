@@ -1,5 +1,5 @@
-import { useCallback } from '#motion/composables/useCallback'
-import { useEffect } from '#motion/composables/useEffect'
+import { useCallback } from '#motion/react/useCallback'
+import { useEffect } from '#motion/react/useEffect'
 import { IKPresenceContext, type PresenceContextProps } from '#motion/context/PresenceContext'
 
 export type SafeToRemove = () => void

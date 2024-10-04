@@ -1,4 +1,4 @@
-import { useState } from '#motion/composables/useState'
+import { useState } from '#motion/react/useState'
 import { initPrefersReducedMotion } from '#motion/utils/reducedMotion/index'
 import { hasReducedMotionListener, prefersReducedMotion } from '#motion/utils/reducedMotion/state'
 import { warnOnce } from '#motion/utils/warnOnce'

@@ -1,4 +1,4 @@
-import { useMemo } from '#motion/composables/useMemo'
+import { useMemo } from '#motion/react/useMemo'
 import type { DefineComponent } from 'vue'
 import type { MotionProps } from '#motion/motion/types'
 import { copyRawValuesOnly } from '#motion/render/html/useProps'

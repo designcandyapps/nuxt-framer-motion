@@ -1,5 +1,5 @@
-import { useEffect } from '#motion/composables/useEffect'
-import { useState } from '#motion/composables/useState'
+import { useEffect } from '#motion/react/useEffect'
+import { useState } from '#motion/react/useState'
 import { IKMotionConfigContext, motionConfigContextDefault } from '#motion/context/MotionConfigContext'
 import { motionValue, type MotionValue } from '#motion/value/index'
 import { useConstant } from '#motion/utils/useConstant'

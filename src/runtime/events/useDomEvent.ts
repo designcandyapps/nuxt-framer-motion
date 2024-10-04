@@ -1,4 +1,4 @@
-import { useEffect } from '#motion/composables/useEffect'
+import { useEffect } from '#motion/react/useEffect'
 import type { Ref } from 'vue'
 import { addDomEvent } from '#motion/events/addDomEvent'
 

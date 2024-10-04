@@ -1,5 +1,5 @@
 import type { DependencyList, EffectCallback } from '#motion/html'
-import { flushEffects, queueLayoutEffect } from '#motion/composables/effectQueue'
+import { flushEffects, queueLayoutEffect } from '#motion/react/effectQueue'
 
 export function useLayoutEffect(effect: EffectCallback, deps: DependencyList = []) {
   let cleanup
