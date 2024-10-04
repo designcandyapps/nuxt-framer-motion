@@ -1,6 +1,4 @@
 <template>
-  <div class="body" />
-  <h1>Path</h1>
   <div class="container">
     <MotionSvg
       xmlns="http://www.w3.org/2000/svg"
@@ -54,17 +52,5 @@ const icon = {
   stroke-width: 2;
   stroke-linejoin: round;
   stroke-linecap: round;
-}
-
-.body {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-  z-index: -10;
-  perspective: 500px;
-  background: linear-gradient(180deg, #05f, #09f);
 }
 </style>

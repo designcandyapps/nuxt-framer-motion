@@ -23,8 +23,6 @@ const idx = [0, 1, 2, 3]
 </script>
 
 <template>
-  <div class="body" />
-  <h1>Variants</h1>
   <MotionUl
     class="container"
     :variants="container"
@@ -54,16 +52,5 @@ const idx = [0, 1, 2, 3]
 .item {
   background: white;
   border-radius: 100%;
-}
-
-.body {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-  z-index: -10;
-  background: linear-gradient(180deg, #d0e, #91f);
 }
 </style>

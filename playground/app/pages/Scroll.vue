@@ -1,6 +1,5 @@
 <template>
   <div class="body" />
-  <h1>Scroll</h1>
   <div class="wrapper">
     <MotionDiv class="container" :style="{ scale }">
       <MotionDiv class="item" :style="{ scaleY: scrollYProgress }" />
@@ -49,6 +48,5 @@ const scale = useTransform(scrollYProgress, [0, 1], [0.2, 2])
   top: 0;
   left: 0;
   z-index: -10;
-  background: linear-gradient(180deg, #40f, #05f);
 }
 </style>
