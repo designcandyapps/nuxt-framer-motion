@@ -1,5 +1,5 @@
 import { elements } from './elements'
-import { defineNuxtModule, createResolver, addComponent } from '@nuxt/kit'
+import { defineNuxtModule, createResolver, addComponent, addImportsDir } from '@nuxt/kit'
 
 export interface ModuleOptions {}
 
@@ -13,6 +13,8 @@ export default defineNuxtModule<ModuleOptions>({
     const { resolve } = createResolver(import.meta.url)
 
     nuxt.options.alias['#motion'] = resolve('./runtime')
+
+    addImportsDir(resolve('./runtime/render/composables'))
 
     elements.forEach((tag) => {
       addComponent({

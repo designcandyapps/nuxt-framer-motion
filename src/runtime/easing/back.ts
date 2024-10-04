@@ -1,4 +1,4 @@
-import { cubicBezier } from './cubic-bezier'
+import { cubicBezier } from './cubicBezier'
 import { mirrorEasing } from './modifiers/mirror'
 import { reverseEasing } from './modifiers/reverse'
 

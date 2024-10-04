@@ -1,5 +1,5 @@
 import { invariant } from '#motion/utils/errors'
-import { cubicBezier } from '#motion/easing/cubic-bezier'
+import { cubicBezier } from '#motion/easing/cubicBezier'
 import { noop } from '#motion/utils/noop'
 import { easeIn, easeInOut, easeOut } from '#motion/easing/ease'
 import { circIn, circInOut, circOut } from '#motion/easing/circ'
