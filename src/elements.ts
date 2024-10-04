@@ -168,3 +168,5 @@ export const svgElements = [
   'radialGradient',
   'textPath'
 ]
+
+const elements = htmlElements.concat(svgElements)

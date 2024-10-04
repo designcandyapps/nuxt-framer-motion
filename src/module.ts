@@ -1,4 +1,4 @@
-import { htmlElements, svgElements } from './elements'
+import { elements } from './elements'
 import { defineNuxtModule, createResolver, addComponent } from '@nuxt/kit'
 
 export interface ModuleOptions {}
@@ -14,15 +14,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.alias['#motion'] = resolve('./runtime')
 
-    htmlElements.forEach((tag) => {
-      addComponent({
-        name: `Motion${tag.charAt(0).toUpperCase() + tag.slice(1)}`,
-        filePath: resolve('./runtime/render/components/motion/namespace'),
-        export: tag
-      })
-    })
-
-    svgElements.forEach((tag) => {
+    elements.forEach((tag) => {
       addComponent({
         name: `Motion${tag.charAt(0).toUpperCase() + tag.slice(1)}`,
         filePath: resolve('./runtime/render/components/motion/namespace'),
