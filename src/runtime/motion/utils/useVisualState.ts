@@ -5,7 +5,6 @@ import type { MotionProps } from '#motion/motion/types'
 import type { ResolvedValues, ScrapeMotionValuesFromProps } from '#motion/render/types'
 import { resolveVariantFromProps } from '#motion/render/utils/resolveVariants'
 import type { TargetAndTransition } from '#motion/types'
-import { addUniqueItem } from '#motion/utils/array'
 import { useConstant } from '#motion/utils/useConstant'
 import { getWillChangeName } from '#motion/value/useWillChange/getWillChangeName'
 import { resolveMotionValue } from '#motion/value/utils/resolveMotionValue'
@@ -75,14 +74,6 @@ export const makeUseVisualState = <I, RS>(config: UseVisualStateConfig<I, RS>): 
     return isStatic ? make() : useConstant(make)
   }
 
-function addWillChange(willChange: string[], name: string) {
-  const memberName = getWillChangeName(name)
-
-  if (memberName) {
-    addUniqueItem(willChange, memberName)
-  }
-}
-
 function forEachDefinition(
   props: MotionProps,
   definition: MotionProps['animate'] | MotionProps['initial'],
@@ -109,7 +100,6 @@ function makeLatestValues(
   scrapeMotionValues: ScrapeMotionValuesFromProps
 ) {
   const values: ResolvedValues = {}
-  const willChange: string[] = []
   const applyWillChange
     = shouldApplyWillChange && props.style?.willChange === undefined
 
@@ -176,13 +166,13 @@ function makeLatestValues(
     if (animate && initial !== false && !isAnimationControls(animate)) {
       forEachDefinition(props, animate, (target) => {
         for (const key in target) {
-          addWillChange(willChange, key)
+          const willChangeName = getWillChangeName(key)
+          if (willChangeName) {
+            values.willChange = 'transform'
+            return
+          }
         }
       })
-    }
-
-    if (willChange.length) {
-      values.willChange = willChange.join(',')
     }
   }
 
