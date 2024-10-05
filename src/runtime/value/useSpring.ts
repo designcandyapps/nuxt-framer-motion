@@ -1,11 +1,10 @@
+import { smartInject } from '#motion/react/smartIP'
 import { useInsertionEffect } from '#motion/react/useInsertionEffect'
 import type { MotionValue } from '#motion/value/index'
 import { isMotionValue } from '#motion/value/utils/isMotionValue'
 import { useMotionValue } from '#motion/value/useMotionValue'
 import {
-  type MotionConfigContext,
-  IKMotionConfigContext,
-  motionConfigContextDefault
+  IKMotionConfigContext
 } from '#motion/context/MotionConfigContext'
 import type { SpringOptions } from '#motion/animation/types'
 import { useIsomorphicLayoutEffect } from '#motion/utils/useIsomorphicLayoutEffect'
@@ -43,7 +42,7 @@ export function useSpring(
   source: MotionValue<string> | MotionValue<number> | number,
   config: SpringOptions = {}
 ) {
-  const { isStatic } = inject<MotionConfigContext>(IKMotionConfigContext, motionConfigContextDefault)
+  const { isStatic } = smartInject(IKMotionConfigContext)
   const activeSpringAnimation = ref<MainThreadAnimation<number> | null>(
     null
   )

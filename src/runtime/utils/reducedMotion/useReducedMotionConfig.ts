@@ -1,9 +1,10 @@
-import { IKMotionConfigContext, motionConfigContextDefault } from '#motion/context/MotionConfigContext'
+import { IKMotionConfigContext } from '#motion/context/MotionConfigContext'
+import { smartInject } from '#motion/react/smartIP'
 import { useReducedMotion } from '#motion/utils/reducedMotion/useReducedMotion'
 
 export function useReducedMotionConfig() {
   const reducedMotionPreference = useReducedMotion()
-  const { reducedMotion } = inject(IKMotionConfigContext, motionConfigContextDefault)
+  const { reducedMotion } = smartInject(IKMotionConfigContext)
 
   if (reducedMotion === 'never') {
     return false

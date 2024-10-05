@@ -1,6 +1,6 @@
 import type { TransformPoint } from '#motion/projection/geometry/types'
+import { createSmartKey } from '#motion/react/smartIP'
 import type { Transition } from '#motion/types'
-import type { InjectionKey } from '@vue/runtime-core'
 
 export type ReducedMotionConfig = 'always' | 'never' | 'user'
 
@@ -44,9 +44,10 @@ export interface MotionConfigContext {
   nonce?: string
 }
 
-export const IKMotionConfigContext: InjectionKey<MotionConfigContext> = Symbol('IKMotionConfigContext')
-export const motionConfigContextDefault = {
-  transformPagePoint: p => p,
-  isStatic: false,
-  reducedMotion: 'never'
-}
+export const IKMotionConfigContext = createSmartKey<MotionConfigContext>(
+  'IKMotionConfigContext', {
+    transformPagePoint: p => p,
+    isStatic: false,
+    reducedMotion: 'never'
+  }
+)

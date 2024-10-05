@@ -1,8 +1,6 @@
-import { IKLayoutGroupContext, type LayoutGroupContextProps } from '#motion/context/LayoutGroupContext'
+import { IKLayoutGroupContext } from '#motion/context/LayoutGroupContext'
 import {
-  IKMotionConfigContext,
-  type MotionConfigContext,
-  motionConfigContextDefault
+  IKMotionConfigContext
 } from '#motion/context/MotionConfigContext'
 import { IKMotionContext } from '#motion/context/MotionContext'
 import { useCreateMotionContext } from '#motion/context/MotionContext/create'
@@ -12,6 +10,7 @@ import type { MotionProps } from '#motion/motion/types'
 import { useVisualElement } from '#motion/motion/utils/useVisualElement'
 import type { UseVisualState } from '#motion/motion/utils/useVisualState'
 import { _validMotionProps } from '#motion/motion/utils/validProp'
+import { smartInject, smartProvide } from '#motion/react/smartIP'
 import { isBrowser } from '#motion/utils/isBrowser'
 import type { DefineComponent } from 'vue'
 import { defineComponent } from 'vue'
@@ -61,7 +60,7 @@ export function createRendererMotionComponent<
       let MeasureLayout: undefined | DefineComponent
 
       const configAndProps = {
-        ...inject<MotionConfigContext>(IKMotionConfigContext, motionConfigContextDefault),
+        ...smartInject(IKMotionConfigContext),
         ...props,
         layoutId: useLayoutId(props)
       }
@@ -70,10 +69,10 @@ export function createRendererMotionComponent<
 
       const context = useCreateMotionContext<Instance>(props)
 
+      smartProvide(IKMotionContext, context)
       watch(context, (newContext) => {
         provide(IKMotionContext, newContext)
-      },
-      { immediate: true })
+      }, { immediate: true })
 
       const visualState = useVisualState(props, isStatic)
 
@@ -118,7 +117,7 @@ export function createRendererMotionComponent<
 }
 
 function useLayoutId({ layoutId }: MotionProps) {
-  const layoutGroupId = inject<LayoutGroupContextProps>(IKLayoutGroupContext, {}).id
+  const layoutGroupId = smartInject(IKLayoutGroupContext).id
   return layoutGroupId && layoutId !== undefined
     ? layoutGroupId + '-' + layoutId
     : layoutId

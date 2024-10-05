@@ -6,8 +6,7 @@ import { variantProps } from '#motion/render/utils/variantProps'
 export function isControllingVariants(props: MotionProps) {
   return (
     isAnimationControls(props.animate)
-    || variantProps.some(name =>
-      isVariantLabel(props[name as keyof typeof props])
+    || variantProps.some(name => isVariantLabel(props[name as keyof typeof props])
     )
   )
 }

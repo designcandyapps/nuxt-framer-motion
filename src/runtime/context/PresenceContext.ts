@@ -1,4 +1,4 @@
-import type { InjectionKey } from 'vue'
+import { createSmartKey } from '#motion/react/smartIP'
 import type { VariantLabels } from '#motion/motion/types'
 
 /**
@@ -13,4 +13,7 @@ export interface PresenceContextProps {
   custom?: any
 }
 
-export const IKPresenceContext: InjectionKey<PresenceContextProps> = Symbol('IKPresenceContext')
+export const IKPresenceContext = createSmartKey<PresenceContextProps>(
+  'IKPresenceContext',
+  null
+)

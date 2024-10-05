@@ -10,10 +10,7 @@ export function getCurrentTreeVariants(
   if (isControllingVariants(props)) {
     const { initial, animate } = props
     return {
-      initial:
-        initial === false || isVariantLabel(initial)
-          ? (initial as any)
-          : undefined,
+      initial: initial === false || isVariantLabel(initial) ? (initial as any) : undefined,
       animate: isVariantLabel(animate) ? animate : undefined
     }
   }

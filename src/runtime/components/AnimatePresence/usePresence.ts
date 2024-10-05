@@ -1,3 +1,4 @@
+import { smartInject } from '#motion/react/smartIP'
 import { useCallback } from '#motion/react/useCallback'
 import { useEffect } from '#motion/react/useEffect'
 import { IKPresenceContext, type PresenceContextProps } from '#motion/context/PresenceContext'
@@ -34,7 +35,7 @@ type NotPresent = [false, SafeToRemove]
  * @public
  */
 export function usePresence(): AlwaysPresent | Present | NotPresent {
-  const context = inject(IKPresenceContext, null)
+  const context = smartInject(IKPresenceContext)
 
   if (context === null) return [true, null]
 
@@ -72,7 +73,7 @@ export function usePresence(): AlwaysPresent | Present | NotPresent {
  * @public
  */
 export function useIsPresent() {
-  return isPresent(inject(IKPresenceContext, null))
+  return isPresent(smartInject(IKPresenceContext))
 }
 
 export function isPresent(context: PresenceContextProps | null) {

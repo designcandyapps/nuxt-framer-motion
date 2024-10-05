@@ -1,4 +1,4 @@
-import type { InjectionKey } from 'vue'
+import { createSmartKey } from '#motion/react/smartIP'
 import type { NodeGroup } from '#motion/projection/node/group'
 
 export interface LayoutGroupContextProps {
@@ -7,4 +7,7 @@ export interface LayoutGroupContextProps {
   forceRender?: VoidFunction
 }
 
-export const IKLayoutGroupContext: InjectionKey<LayoutGroupContextProps> = Symbol('IKLayoutGroupContextProps')
+export const IKLayoutGroupContext = createSmartKey<LayoutGroupContextProps>(
+  'IKLayoutGroupContextProps',
+  {}
+)

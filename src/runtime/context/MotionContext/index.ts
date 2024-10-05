@@ -1,5 +1,5 @@
+import { createSmartKey } from '#motion/react/smartIP'
 import type { VisualElement } from '#motion/render/VisualElement'
-import type { InjectionKey } from 'vue'
 
 export interface MotionContextProps<Instance = unknown> {
   visualElement?: VisualElement<Instance>
@@ -7,4 +7,7 @@ export interface MotionContextProps<Instance = unknown> {
   animate?: string | string[]
 }
 
-export const IKMotionContext: InjectionKey<MotionContextProps> = Symbol('IKMotionContext')
+export const IKMotionContext = createSmartKey<MotionContextProps>(
+  'IKMotionContext',
+  {}
+)

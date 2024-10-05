@@ -1,3 +1,4 @@
+import { smartInject } from '#motion/react/smartIP'
 import { useTransform } from '#motion/value/useTransform'
 import type { MotionValue } from '#motion/value/index'
 import { invariant, warning } from '#motion/utils/errors'
@@ -42,7 +43,7 @@ export function useInvertedScale(
 ): ScaleMotionValues {
   let parentScaleX = useMotionValue(1)
   let parentScaleY = useMotionValue(1)
-  const { visualElement } = inject(IKMotionContext, {})
+  const { visualElement } = smartInject(IKMotionContext)
 
   invariant(
     !!(scale || visualElement),

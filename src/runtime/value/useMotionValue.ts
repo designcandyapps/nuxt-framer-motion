@@ -1,6 +1,7 @@
+import { smartInject } from '#motion/react/smartIP'
 import { useEffect } from '#motion/react/useEffect'
 import { useState } from '#motion/react/useState'
-import { IKMotionConfigContext, motionConfigContextDefault } from '#motion/context/MotionConfigContext'
+import { IKMotionConfigContext } from '#motion/context/MotionConfigContext'
 import { motionValue, type MotionValue } from '#motion/value/index'
 import { useConstant } from '#motion/utils/useConstant'
 
@@ -29,7 +30,7 @@ export function useMotionValue<T>(initial: T): MotionValue<T> {
    * the Framer canvas, force components to rerender when the motion
    * value is updated.
    */
-  const { isStatic } = inject(IKMotionConfigContext, motionConfigContextDefault)
+  const { isStatic } = smartInject(IKMotionConfigContext)
   if (isStatic) {
     const [, setLatest] = useState(initial)
     useEffect(() => value.on('change', setLatest), [])

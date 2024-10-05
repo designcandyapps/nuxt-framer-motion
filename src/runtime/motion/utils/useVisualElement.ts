@@ -1,18 +1,17 @@
 import { optimizedAppearDataAttribute } from '#motion/animation/optimizedAppear/dataId'
+import { smartInject } from '#motion/react/smartIP'
 import { useEffect } from '#motion/react/useEffect'
 import { useInsertionEffect } from '#motion/react/useInsertionEffect'
-import { IKLazyContext, type LazyContextProps } from '#motion/context/LazyContext'
+import { IKLazyContext } from '#motion/context/LazyContext'
 import {
   IKMotionConfigContext,
-  type MotionConfigContext,
-  motionConfigContextDefault
+  type MotionConfigContext
 } from '#motion/context/MotionConfigContext'
 import { IKMotionContext } from '#motion/context/MotionContext'
-import { IKPresenceContext, type PresenceContextProps } from '#motion/context/PresenceContext'
+import { IKPresenceContext } from '#motion/context/PresenceContext'
 import {
   IKSwitchLayoutGroupContext,
-  type InitialPromotionConfig,
-  type SwitchLayoutGroupContext
+  type InitialPromotionConfig
 } from '#motion/context/SwitchLayoutGroupContext'
 import { microtask } from '#motion/frameloop/microtask'
 import type { MotionProps } from '#motion/motion/types'
@@ -33,10 +32,10 @@ export function useVisualElement<Instance, RenderState>(
   createVisualElement?: CreateVisualElement<Instance>,
   ProjectionNodeConstructor?: any
 ): VisualElement<Instance> | undefined {
-  const { visualElement: parent } = inject(IKMotionContext, {})
-  const lazyContext = inject<LazyContextProps>(IKLazyContext, {})
-  const presenceContext = inject<PresenceContextProps>(IKPresenceContext, null)
-  const reducedMotionConfig = inject<MotionConfigContext>(IKMotionConfigContext, motionConfigContextDefault).reducedMotion
+  const { visualElement: parent } = smartInject(IKMotionContext)
+  const lazyContext = smartInject(IKLazyContext)
+  const presenceContext = smartInject(IKPresenceContext)
+  const reducedMotionConfig = smartInject(IKMotionConfigContext).reducedMotion
 
   const visualElementRef = ref<VisualElement<Instance>>()
 
@@ -64,7 +63,7 @@ export function useVisualElement<Instance, RenderState>(
    * Load Motion gesture and animation features. These are rendered as renderless
    * components so each feature can optionally make use of React lifecycle methods.
    */
-  const initialLayoutGroupConfig = inject<SwitchLayoutGroupContext>(IKSwitchLayoutGroupContext, {})
+  const initialLayoutGroupConfig = smartInject(IKSwitchLayoutGroupContext)
 
   if (
     visualElement

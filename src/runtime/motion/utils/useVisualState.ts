@@ -2,6 +2,7 @@ import { isAnimationControls } from '#motion/animation/utils/isAnimationControls
 import { IKMotionContext, type MotionContextProps } from '#motion/context/MotionContext'
 import { IKPresenceContext, type PresenceContextProps } from '#motion/context/PresenceContext'
 import type { MotionProps } from '#motion/motion/types'
+import { smartInject } from '#motion/react/smartIP'
 import type { ResolvedValues, ScrapeMotionValuesFromProps } from '#motion/render/types'
 import { resolveVariantFromProps } from '#motion/render/utils/resolveVariants'
 import type { TargetAndTransition } from '#motion/types'
@@ -67,8 +68,8 @@ function makeState<I, RS>(
 
 export const makeUseVisualState = <I, RS>(config: UseVisualStateConfig<I, RS>): UseVisualState<I, RS> =>
   (props: MotionProps, isStatic: boolean): VisualState<I, RS> => {
-    const context = inject<MotionContextProps>(IKMotionContext, {})
-    const presenceContext = inject<PresenceContextProps>(IKPresenceContext, null)
+    const context = smartInject(IKMotionContext)
+    const presenceContext = smartInject(IKPresenceContext)
     const make = () => makeState(config, props, context, presenceContext, isStatic)
 
     return isStatic ? make() : useConstant(make)

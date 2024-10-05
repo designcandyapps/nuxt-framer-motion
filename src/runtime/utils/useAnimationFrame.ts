@@ -1,9 +1,8 @@
 import { cancelFrame, frame } from '#motion/frameloop'
+import { smartInject } from '#motion/react/smartIP'
 import { useEffect } from '#motion/react/useEffect'
 import {
-  IKMotionConfigContext,
-  type MotionConfigContext,
-  motionConfigContextDefault
+  IKMotionConfigContext
 } from '#motion/context/MotionConfigContext'
 import type { FrameData } from '#motion/frameloop/types'
 
@@ -11,7 +10,7 @@ export type FrameCallback = (timestamp: number, delta: number) => void
 
 export function useAnimationFrame(callback: FrameCallback) {
   const initialTimestamp = ref(0)
-  const { isStatic } = inject<MotionConfigContext>(IKMotionConfigContext, motionConfigContextDefault)
+  const { isStatic } = smartInject(IKMotionConfigContext)
 
   useEffect(() => {
     if (isStatic) return

@@ -1,6 +1,6 @@
 import type { IProjectionNode } from '#motion/projection/node/types'
+import { createSmartKey } from '#motion/react/smartIP'
 import type { Transition } from '#motion/types'
-import type { InjectionKey } from 'vue'
 
 export interface SwitchLayoutGroup {
   register?: (member: IProjectionNode) => void
@@ -21,4 +21,7 @@ export type InitialPromotionConfig = {
   shouldPreserveFollowOpacity?: (member: IProjectionNode) => boolean
 }
 
-export const IKSwitchLayoutGroupContext: InjectionKey<SwitchLayoutGroupContext> = Symbol('IKSwitchLayoutGroupContext')
+export const IKSwitchLayoutGroupContext = createSmartKey<SwitchLayoutGroupContext>(
+  'IKSwitchLayoutGroupContext',
+  {}
+)
