@@ -1,4 +1,4 @@
-import { animateSingleValue } from '#motion/animation/interfaces/singleValue'
+import { animateSingleValue } from '#motion/animation/animate/singleValue'
 import { cancelFrame, frame, frameData, frameSteps } from '#motion/frameloop'
 import type { AnimationPlaybackControls, ValueAnimationOptions } from '#motion/animation/types'
 import { microtask } from '#motion/frameloop/microtask'

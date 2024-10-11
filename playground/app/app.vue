@@ -27,7 +27,8 @@ const components = [
   'keyframes',
   'path',
   'scroll',
-  'variants'
+  'variants',
+  'navigation'
 ]
 
 function upperName(name: string) {

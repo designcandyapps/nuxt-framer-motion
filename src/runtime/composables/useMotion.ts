@@ -47,3 +47,8 @@ export * from '../easing/modifiers/reverse'
 export { spring } from '../animation/generators/spring'
 export { inertia } from '../animation/generators/inertia'
 export { keyframes } from '../animation/generators/keyframes'
+
+/**
+ * Misc
+ */
+export { useCycle } from '#motion/utils/useCycle'

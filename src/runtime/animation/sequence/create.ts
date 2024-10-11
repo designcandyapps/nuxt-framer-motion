@@ -1,12 +1,12 @@
 import type { Easing } from '#motion/easing/types'
 import { createGeneratorEasing } from '#motion/easing/utils/createGeneratorEasing'
-import { resolveElements } from '#motion/render/dom/utils/resolveElement'
 import { defaultOffset } from '#motion/utils/offsets/default'
 import { fillOffset } from '#motion/utils/offsets/fill'
 import { progress } from '#motion/utils/progress'
 import { secondsToMilliseconds } from '#motion/utils/time-conversion'
 import type { MotionValue } from '#motion/value'
 import { isMotionValue } from '#motion/value/utils/is-motion-value'
+import { resolveSubjects } from '#motion/animation/animate/resolveSubjects'
 import { isGenerator } from '#motion/animation/generators/utils/is-generator'
 import type { DynamicAnimationOptions, GeneratorFactory,
   AnimationScope,
@@ -92,7 +92,7 @@ export function createAnimationsFromSequence(
       valueTransition: Transition | DynamicAnimationOptions,
       valueSequence: ValueSequence,
       elementIndex = 0,
-      numElements = 0
+      numSubjects = 0
     ) => {
       const valueKeyframesAsList = keyframesAsList(valueKeyframes)
       const {
@@ -109,7 +109,7 @@ export function createAnimationsFromSequence(
        */
       const calculatedDelay
         = typeof delay === 'function'
-          ? delay(elementIndex, numElements)
+          ? delay(elementIndex, numSubjects)
           : delay
 
       /**
@@ -202,20 +202,21 @@ export function createAnimationsFromSequence(
         getValueSequence('default', subjectSequence)
       )
     } else {
-      /**
-       * Find all the elements specified in the definition and parse value
-       * keyframes from their timeline definitions.
-       */
-      const elements = resolveElements(subject, scope, elementCache)
-      const numElements = elements.length
+      const subjects = resolveSubjects(
+        subject,
+        keyframes as DOMKeyframesDefinition,
+        scope,
+        elementCache
+      )
+      const numSubjects = subjects.length
 
       /**
        * For every element in this segment, process the defined values.
        */
       for (
-        let elementIndex = 0;
-        elementIndex < numElements;
-        elementIndex++
+        let subjectIndex = 0;
+        subjectIndex < numSubjects;
+        subjectIndex++
       ) {
         /**
          * Cast necessary, but we know these are of this type
@@ -223,8 +224,11 @@ export function createAnimationsFromSequence(
         keyframes = keyframes as DOMKeyframesDefinition
         transition = transition as DynamicAnimationOptions
 
-        const element = elements[elementIndex]
-        const subjectSequence = getSubjectSequence(element, sequences)
+        const thisSubject = subjects[subjectIndex]
+        const subjectSequence = getSubjectSequence(
+          thisSubject,
+          sequences
+        )
 
         for (const key in keyframes) {
           resolveValueSequence(
@@ -233,8 +237,8 @@ export function createAnimationsFromSequence(
             ] as UnresolvedValueKeyframe,
             getValueTransition(transition, key),
             getValueSequence(key, subjectSequence),
-            elementIndex,
-            numElements
+            subjectIndex,
+            numSubjects
           )
         }
       }
@@ -315,9 +319,9 @@ export function createAnimationsFromSequence(
   return animationDefinitions
 }
 
-function getSubjectSequence(
-  subject: Element | MotionValue,
-  sequences: Map<Element | MotionValue, SequenceMap>
+function getSubjectSequence<O extends {}>(
+  subject: Element | MotionValue | O,
+  sequences: Map<Element | MotionValue | O, SequenceMap>
 ): SequenceMap {
   !sequences.has(subject) && sequences.set(subject, {})
   return sequences.get(subject)!
@@ -338,7 +342,7 @@ export function getValueTransition(
   transition: DynamicAnimationOptions & At,
   key: string
 ): DynamicAnimationOptions {
-  return transition[key as keyof typeof transition]
+  return transition && transition[key as keyof typeof transition]
     ? {
         ...transition,
         ...(transition[key as keyof typeof transition] as Transition)

@@ -1,8 +1,9 @@
 import type { CSSProperties, SVGAttributes } from 'vue'
 import type { Easing } from '#motion/easing/types'
 import type { CustomStyles, SVGPathProperties, TransformProperties } from '#motion/motion/types'
+import type { VariableKeyframesDefinition } from '#motion/animation/types'
 
-export type GenericKeyframesTarget<V> = [null, ...V[]] | V[]
+export type GenericKeyframesTarget<V> = V[] | Array<null | V>
 
 /**
  * @public
@@ -971,7 +972,8 @@ type TargetProperties = CSSPropertiesWithoutTransitionOrSingleTransforms &
   SVGTransformAttributes &
   TransformProperties &
   CustomStyles &
-  SVGPathProperties
+  SVGPathProperties &
+  VariableKeyframesDefinition
 
 /**
  * @public

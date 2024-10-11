@@ -70,9 +70,6 @@ export function createRendererMotionComponent<
       const context = useCreateMotionContext<Instance>(props)
 
       smartProvide(IKMotionContext, context)
-      watch(context, (newContext) => {
-        provide(IKMotionContext, newContext)
-      }, { immediate: true })
 
       const visualState = useVisualState(props, isStatic)
 

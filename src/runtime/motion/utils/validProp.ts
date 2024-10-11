@@ -1,4 +1,25 @@
-import type { MotionProps } from '#motion/motion/types'
+import type { AnimationControls } from '#motion/animation/types'
+import type { MotionProps, VariantLabels } from '#motion/motion/types'
+import type { Target, TargetAndTransition, Transition, Variants } from '#motion/types'
+import type { PropType } from '@vue/runtime-core'
+
+export const motionProps = {
+  initial: {
+    type: [Boolean, Object as PropType<Target | VariantLabels>]
+  },
+  animate: {
+    type: [Boolean, Object as PropsType<AnimationControls | TargetAndTransition | VariantLabels>]
+  },
+  exit: {
+    type: [Object as PropType<TargetAndTransition | VariantLabels>]
+  },
+  variants: {
+    type: Object as PropType<Variants>
+  },
+  transition: {
+    type: Object as PropType<Transition>
+  }
+}
 
 export const _validMotionProps = [
   'animate',

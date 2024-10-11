@@ -1,23 +1,16 @@
-import type { ComputedRef, Ref } from 'vue'
-import { computed, watch, isRef } from 'vue'
+import type { Ref } from 'vue'
 
-export function useMemo<T>(fn: () => T, deps: (any | Ref<any>)[]): ComputedRef<T> {
-  const depsAreRefs = deps.every(dep => isRef(dep))
+type EffectCallback<T> = () => T
+type DependencyList = Ref<any>[]
 
-  let prevDeps = depsAreRefs ? deps.map(dep => dep.value) : deps
+export function useMemo<T>(fn: EffectCallback<T>, deps: DependencyList = []): Ref<T> {
+  const memoizedValue = ref<T>() as Ref<T>
 
-  const memoizedValue = computed(fn)
+  memoizedValue.value = fn()
 
-  if (depsAreRefs) {
-    watch(deps, (newDeps) => {
-      const hasChanged = newDeps.some((newDep, i) => newDep.value !== prevDeps[i])
-
-      if (hasChanged) {
-        prevDeps = newDeps.map(dep => dep.value)
-        memoizedValue.value
-      }
-    })
-  }
+  watch(deps, () => {
+    memoizedValue.value = fn()
+  }, { deep: true })
 
   return memoizedValue
 }

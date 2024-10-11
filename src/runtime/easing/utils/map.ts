@@ -6,6 +6,7 @@ import { circIn, circInOut, circOut } from '#motion/easing/circ'
 import { backIn, backInOut, backOut } from '#motion/easing/back'
 import { anticipate } from '#motion/easing/anticipate'
 import type { Easing } from '#motion/easing/types'
+import { isBezierDefinition } from '#motion/easing/utils/isBezierDefinition'
 
 const easingLookup = {
   linear: noop,
@@ -22,7 +23,7 @@ const easingLookup = {
 }
 
 export const easingDefinitionToFunction = (definition: Easing) => {
-  if (Array.isArray(definition)) {
+  if (isBezierDefinition(definition)) {
     // If cubic bezier definition, create bezier curve
     invariant(
       definition.length === 4,

@@ -9,7 +9,7 @@ export function smartProvide<T>(smartKey: SmartKey<T>, providedValue: Ref<T>) {
   const currentValue = smartInject(smartKey)
 
   watch(providedValue, (value) => {
-    if (value !== currentValue) {
+    if ((!currentValue && value) || value !== currentValue) {
       provide(smartKey.key, value)
     }
   }, { immediate: true, deep: true })
