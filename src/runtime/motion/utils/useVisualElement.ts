@@ -22,7 +22,7 @@ import type { CreateVisualElement } from '#motion/render/types'
 import type { VisualElement } from '#motion/render/VisualElement'
 import { isRefObject } from '#motion/utils/isRefObject'
 import { useIsomorphicLayoutEffect } from '#motion/utils/useIsomorphicLayoutEffect'
-import type { DefineComponent, Ref } from 'vue'
+import { type DefineComponent, onMounted, ref, type Ref } from 'vue'
 
 export function useVisualElement<Instance, RenderState>(
   component: string | DefineComponent,
@@ -80,7 +80,9 @@ export function useVisualElement<Instance, RenderState>(
   }
 
   useInsertionEffect(() => {
-    visualElement && visualElement.update(props, presenceContext)
+    if (visualElement && visualElement.current) {
+      visualElement && visualElement.update(props, presenceContext)
+    }
   })
 
   /**
