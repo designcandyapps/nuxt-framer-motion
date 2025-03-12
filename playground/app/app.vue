@@ -4,7 +4,34 @@
       <UNavigationMenu :items="items" orientation="vertical" class="border-r border-gray-200 dark:border-gray-800 overflow-y-auto w-48 p-4" />
 
       <div class="flex flex-col w-full items-center p-8">
-        <NuxtPage />
+        <template>
+  <MotionMain
+    class="container"
+    :initial="{ backgroundSize: '100%' }"
+    :animate="{ backgroundSize: '200%' }"
+    :transition="{
+      type: 'spring',
+      stiffness: 400,
+      damping: 40,
+      repeat: Infinity,
+      repeatType: 'mirror',
+      repeatDelay: 0.2
+    }"
+  />
+</template>
+
+<script setup lang="ts">
+</script>
+
+<style scoped>
+.container {
+  width: 150px;
+  height: 150px;
+  background-image: url("https://framerusercontent.com/images/M4SNURkNYCDjIiopKdiL689jOQ.svg");
+  border-radius: 30px;
+}
+</style>
+
       </div>
 
       <UModal v-model:open="isCommandPaletteOpen" class="sm:h-96">
